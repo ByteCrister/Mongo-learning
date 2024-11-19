@@ -1,0 +1,71 @@
+
+mongod --version
+
+mongosh
+
+**** Commands ***
+
+show dbs
+
+use student // creating new database "student"
+
+db // to show current database name
+
+db.createCollection("students")  // creating new createCollection name "students"
+
+show collections
+
+db.dropDatabase()  // deleting database
+
+******** Create ********
+db.collectionName.insertOne()
+db.collectionName.insertMany()
+db.collectionName.insert()
+
+
+db.user.insertOne( { name:"Sadiqul Islam Shakib", email: "email1@gmail.com", languages: [ "English", "Bangla" ]  } )
+db.user.insertMany( [ { name: "Emon", age: 20, email: "email2@gmail.com"  }, { name: "Naveed", age: 3, email: "email3@gmail.com"  }  ] )
+
+
+
+******** Read *********
+db.collectionName.find() // to find document from any collection
+db.user.find()
+
+db.collectionName.find( { condition } ).limit( number )  // see specific document based on condition and limit the searched documents
+db.user.find({email: "email2@gmail.com"})
+db.user.find().limit(1)
+
+
+****** Update *******
+db.collectionName.update({ condition }, { $set: { filedName: newValue} }) // for single update
+db.collectionName.updateMany({ age: : 30 },  { $set: { status: "active", lastUpdated: new Date() } }) // for multiple update
+
+
+
+****** Delete *******
+db.collectionName.deleteOne({ condition })
+db.user.deleteOne( { email: "email1@gmail.com" } )
+
+
+
+
+
+
+
+| Operator | Description                              | Example                                                   |
+|----------|------------------------------------------|-----------------------------------------------------------|
+| $gt      | Greater than                             | { age: { $gt: 30 } }                                      |
+| $lt      | Less than                                | { age: { $lt: 30 } }                                      |
+| $gte     | Greater than or equal to                 | { age: { $gte: 30 } }                                     |
+| $lte     | Less than or equal to                    | { age: { $lte: 30 } }                                     |
+| $and     | Matches all conditions in the array      | { $and: [ { age: { $gt: 30 } }, { status: "inactive" } ] }|
+| $or      | Matches any condition in the array       | { $or: [ { age: { $gt: 30 } }, { status: "inactive" } ] } |
+| $not     | Negates the condition                    | { age: { $not: { $gt: 30 } } }                            |
+| $eq      | Equal to                                 | { status: { $eq: "active" } }                             |
+| $ne      | Not equal to                             | { status: { $ne: "inactive" } }                           |
+| $in      | In an array of values                    | { status: { $in: ["active", "pending"] } }                |
+| $nin     | Not in an array of values                | { status: { $nin: ["inactive", "archived"] } }            |
+| $exists  | Checks if field exists or not            | { age: { $exists: true } }                                |
+| $type    | Matches documents of a specified type    | { age: { $type: "int" } }                                 |
+| $all     | Matches all specified elements in an array | { tags: { $all: ["tag1", "tag2"] } }                    |
